@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/01/24 19:21:43 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:00:48 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	player_move(int	keycode, t_game *game)
 	if (game->map[game->player.y][game->player.x] != 'E')
 		mlx_put_image_to_window(game->mlx, game->win, game->imgPlayer, game->player.x * 64, game->player.y * 64);
 	else
-		mlx_put_image_to_window(game->mlx, game->win, game->imgCoin, game->player.x * 64, game->player.y * 64);
+		mlx_put_image_to_window(game->mlx, game->win, game->imgEnd, game->player.x * 64, game->player.y * 64);
 
 	//ft_printf("NOMBRE COLLECTIBLE : %d", game->collectible);
 	ft_printf("NOMBRE MOUVEMENT : %d\n", move);
