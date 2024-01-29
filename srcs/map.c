@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/01/22 18:41:55 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:18:26 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,10 @@ char	*read_file(int fd)
 
 void	get_map(char *filename, t_game *game)
 {
-	char *line;
-	int fd_map;
-	int i;
-
-	i = 0;
+	char 	*line;
+	int 	fd_map;
 	fd_map = open(filename, O_RDONLY);
 	line = read_file(fd_map);
 	game->map = ft_split(line, '\n');
-	// while (game->map[i])
-	// {
-	// 	//printf("%s", game->map[i]);
-	// 	i++;
-	// };
+	game->split = ft_split(line, '\n');
 }

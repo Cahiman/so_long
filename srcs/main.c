@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/01/24 20:00:48 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:38:17 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,65 +21,89 @@ void	ft_exit(t_game *game)
     free(game->mlx);
 	free(game->map);
 
-    ft_printf("Program quit successfully !");
+    ft_printf("Program quit successfully !\n");
+	ft_printf(ANSI_COLOR_GREEN "YOU WON !\n" ANSI_COLOR_RESET);
     exit(0);
 	
 }
-
-// int	collectible(t_game *game)
-// {
-// 	int	i;
-// 	int	count;
+int		check_utils(t_game *game)
+{
+	int	x;
+	int	y;
 	
-// 	i = 0;
-// 	count = 0;
-// 	while (game->map[i])
-// 	{
-// 		if(game->map[i] == 'C')
-// 			count++;
-// 		i++;
-// 	}
-// 	ft_printf("COLLECTIBLE : %d", count);
-// 	return(0);
-// }
+	y = 0;
+	while (game->split[y])
+	{
+		x = 0;
+		while(game->split[y][x])
+		{
+			if (game->split[y][x] == 'C' || game->split[y][x] == 'E')
+				ft_exit(game);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+void	check_map(t_game *game, int x, int y)
+{
+    game->split[y][x] = 'G';
+    if (game->split[y - 1][x] != '1' && game->split[y - 1][x] != 'G')
+        check_map(game, x, y - 1);
+    if (game->split[y + 1][x] != '1' && game->split[y + 1][x] != 'G')
+        check_map(game, x, y + 1);
+    if (game->split[y][x - 1] != '1' && game->split[y][x - 1] != 'G')
+        check_map(game, x - 1, y);
+    if (game->split[y][x + 1] != '1' && game->split[y][x + 1] != 'G')
+        check_map(game, x + 1, y);
+}
 
 int	player_move(int	keycode, t_game *game)
 {
 	int old_x = game->player.x;
     int old_y = game->player.y;
 	static int move = 0;
+	
 	if (keycode == KEY_ESC)
 		ft_exit(game);
 	if (keycode == KEY_S || keycode == KEY_DOWN)
 	{
 		if ((game->map[game->player.y + 1][game->player.x]) != '1')
-			{game->player.y += 1;
-			move++;}
+			{
+				game->player.y += 1;
+			move++;
+			}
 	}
 	if (keycode == KEY_W || keycode == KEY_UP)
 	{
 		if (game->map[game->player.y - 1][game->player.x] != '1')
-			{game->player.y -= 1;
-			move++;}
+			{
+				game->player.y -= 1;
+			move++;
+			}
 	}
 	if (keycode == KEY_A || keycode == KEY_LEFT)
 	{
 		if (game->map[game->player.y][game->player.x - 1] != '1')
-			{game->player.x -= 1;
-			move++;}
+			{
+				game->player.x -= 1;
+			move++;
+			}
 	}
 	if (keycode == KEY_D || keycode == KEY_RIGHT)
 	{
 		if (game->map[game->player.y][game->player.x + 1] != '1')
-			{game->player.x += 1;
-			move++;}
+			{
+				game->player.x += 1;
+				move++;
+			}
 	}
 	if (game->map[game->player.y][game->player.x] == 'C')
 	{
 		game->map[game->player.y][game->player.x] = '0';
 		game->collectible--;
 	}
-
 	if (game->map[game->player.y][game->player.x] == 'E' && game->collectible == 0)
 		ft_exit(game);
 		
@@ -90,11 +114,10 @@ int	player_move(int	keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->win, game->imgPlayer, game->player.x * 64, game->player.y * 64);
 	else
 		mlx_put_image_to_window(game->mlx, game->win, game->imgEnd, game->player.x * 64, game->player.y * 64);
-
-	//ft_printf("NOMBRE COLLECTIBLE : %d", game->collectible);
 	ft_printf("NOMBRE MOUVEMENT : %d\n", move);
 	return (0);
 }
+
 int	render(t_game *game) 
 {
 	int	y;
@@ -116,6 +139,8 @@ int	render(t_game *game)
 					game->player.x = x;
 					game->player.y = y;
 					mlx_put_image_to_window(game->mlx, game->win, game->imgPlayer, x * 64, y * 64);
+					check_map(game, x, y);
+					check_utils(game);
 				}
 				else if (game->map[y][x] == '0')
 				 	mlx_put_image_to_window(game->mlx, game->win, game->imgFloor, x * 64, y * 64);	
@@ -154,8 +179,6 @@ int	main(void)
 	game.imgFloor = mlx_xpm_file_to_image(game.mlx, "./assets/floor.xpm", &n, &n);
 	game.imgCoin = mlx_xpm_file_to_image(game.mlx, "./assets/coin.xpm", &n, &n);
 	game.imgEnd = mlx_xpm_file_to_image(game.mlx, "./assets/end.xpm", &n, &n);
-	//mlx_put_image_to_window(game.mlx, game.win, game.imgWall, 0, 0);
-	// mlx_loop_hook(game.mlx, &render, &game);
 	render(&game);
 	mlx_key_hook(game.win, player_move, &game);
 	mlx_hook(game.win, 33, 131072, (void *)ft_exit, &game);
