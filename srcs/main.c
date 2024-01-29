@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/01/29 18:38:17 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:47:34 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_exit(t_game *game)
     mlx_destroy_display(game->mlx);
     free(game->mlx);
 	free(game->map);
-
     ft_printf("Program quit successfully !\n");
 	ft_printf(ANSI_COLOR_GREEN "YOU WON !\n" ANSI_COLOR_RESET);
     exit(0);
@@ -45,7 +44,30 @@ int		check_utils(t_game *game)
 	}
 	return (0);
 }
-
+int	count_endpoint(t_game *game)
+{
+	int	x;
+	int	y;
+	
+	game->endPoint = 0;
+	game->numPlayer = 0;
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while(game->map[y][x])
+		{
+			if (game->map[y][x] == 'E')
+				game->endPoint+= 1;
+			x++;
+		}
+		y++;
+	}
+	if (game->endPoint > 1)
+		ft_exit(game);
+	ft_printf("NOMBRE DE END = %d\n", game->endPoint);
+	return (0);
+}
 void	check_map(t_game *game, int x, int y)
 {
     game->split[y][x] = 'G';
@@ -65,6 +87,7 @@ int	player_move(int	keycode, t_game *game)
     int old_y = game->player.y;
 	static int move = 0;
 	
+	count_endpoint(game);
 	if (keycode == KEY_ESC)
 		ft_exit(game);
 	if (keycode == KEY_S || keycode == KEY_DOWN)
@@ -123,6 +146,7 @@ int	render(t_game *game)
 	int	y;
 	int	x;
 
+	game->numPlayer = 0;
 	game->collectible = 0;
 	if (game->win)
 	{
@@ -136,6 +160,7 @@ int	render(t_game *game)
 					mlx_put_image_to_window(game->mlx, game->win, game->imgWall, x * 64, y * 64);
 				else if (game->map[y][x] == 'P')
 				{
+					game->numPlayer += 1;
 					game->player.x = x;
 					game->player.y = y;
 					mlx_put_image_to_window(game->mlx, game->win, game->imgPlayer, x * 64, y * 64);
@@ -156,7 +181,16 @@ int	render(t_game *game)
 			y++;
 		}
 	}
-	ft_printf("NOMBRE COLLECTIBLE : %d", game->collectible);
+	if (game->numPlayer > 1)
+	{
+		ft_printf("Erreur ! Plus d'un joueur sur la map !");
+		ft_exit(game);
+	}
+	if (game->collectible <= 0)
+	{
+		ft_printf("Erreur ! Aucun collectible sur la map !");
+		ft_exit(game);
+	}
 	return (0);
 }
 

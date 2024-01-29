@@ -35,6 +35,8 @@ typedef struct	s_game {
 	void	*imgEnd;
 	char	**map;
 	char 	**split;
+	int		endPoint;
+	int		numPlayer;
 	t_player player;
 	
 }		t_game;
