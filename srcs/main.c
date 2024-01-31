@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/01/29 20:47:34 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:53:19 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	count_endpoint(t_game *game)
 		}
 		y++;
 	}
-	if (game->endPoint > 1)
+	if (game->endPoint != 1)
 		ft_exit(game);
 	ft_printf("NOMBRE DE END = %d\n", game->endPoint);
 	return (0);
@@ -181,7 +181,7 @@ int	render(t_game *game)
 			y++;
 		}
 	}
-	if (game->numPlayer > 1)
+	if (game->numPlayer != 1)
 	{
 		ft_printf("Erreur ! Plus d'un joueur sur la map !");
 		ft_exit(game);
