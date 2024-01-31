@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/01/31 11:53:19 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:12:59 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ int	render(t_game *game)
 	}
 	if (game->numPlayer != 1)
 	{
-		ft_printf("Erreur ! Plus d'un joueur sur la map !");
+		ft_printf("Erreur ! Nombre de joueur incorrecte !");
 		ft_exit(game);
 	}
 	if (game->collectible <= 0)
