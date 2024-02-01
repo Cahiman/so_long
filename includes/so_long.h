@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/01/29 21:03:15 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:33:08 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ enum keys {
 	KEY_RIGHT = 65363
 };
 
-void	get_map(char *filename, t_game *game);
+int	get_map(char *filename, t_game *game);
 
 
 #endif

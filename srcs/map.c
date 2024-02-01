@@ -6,18 +6,33 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/01/29 18:18:26 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:48:22 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// int		squarnt(t_game *game)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (game->map[i])
+// 	{
+// 		if (ft_strlen(game->map[0]) != ft_strlen(game->map[i]))
+// 			return (1);
+// 		i++;
+// 	}
+// 	ft_printf("PRINTF TAILLE = %d\n", ft_strlen(game->map[1]));
+// 	return (0);
+// }
+
 char	*read_file(int fd)
 {
-	char 		*file;
-	char		*buff;
-	char		*tmp;
-	int			n;
+	char	*file;
+	char	*buff;
+	char	*tmp;
+	int		n;
 
 	buff = ft_calloc((10000 + 1), sizeof(char));
 	n = 1;
@@ -41,12 +56,28 @@ char	*read_file(int fd)
 	return (file);
 }
 
-void	get_map(char *filename, t_game *game)
+
+int	get_map(char *filename, t_game *game)
 {
-	char 	*line;
-	int 	fd_map;
+	char	*line;
+	int		fd_map;
+	int	y = 0;
+	int	x = 0;
 	fd_map = open(filename, O_RDONLY);
 	line = read_file(fd_map);
 	game->map = ft_split(line, '\n');
 	game->split = ft_split(line, '\n');
+	while (game->map[y])
+	{
+		if (ft_strlen(game->map[0]) != ft_strlen(game->map[x]))
+			return (1);
+		else
+			x++;
+		y++;
+	}
+
+
+	ft_printf("PRINTF TAILLE LONGUEUR= %d\n", x);
+	ft_printf("PRINTF TAILLE LARGEUR= %d\n", y);
+	return (0);
 }
