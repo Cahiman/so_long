@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/01 18:48:22 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:27:56 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,40 @@ char	*read_file(int fd)
 }
 
 
-int	get_map(char *filename, t_game *game)
+void	get_map(char *filename, t_game *game)
 {
 	char	*line;
 	int		fd_map;
-	int	y = 0;
-	int	x = 0;
+
 	fd_map = open(filename, O_RDONLY);
 	line = read_file(fd_map);
 	game->map = ft_split(line, '\n');
 	game->split = ft_split(line, '\n');
-	while (game->map[y])
-	{
-		if (ft_strlen(game->map[0]) != ft_strlen(game->map[x]))
-			return (1);
-		else
-			x++;
-		y++;
-	}
-
-
-	ft_printf("PRINTF TAILLE LONGUEUR= %d\n", x);
-	ft_printf("PRINTF TAILLE LARGEUR= %d\n", y);
-	return (0);
 }
+
+int    is_rectangle(t_game *game)
+{
+    size_t	y;
+	size_t	x;
+
+    y = 0;
+    y++;
+    while (game->map[y])
+    {
+		x = 0;
+		while (game->map[y][x])
+		{
+        	if (ft_strlen(game->map[0]) != ft_strlen(game->map[y]))
+        	{
+           	 ft_printf("!!! ERROR !!! The map is not rectangular!\n");
+           	 return (0);
+        	}
+			x++;
+		}
+        y++;
+    }
+	game->width = x;
+	game->height = y; 
+    return (1);
+}
+

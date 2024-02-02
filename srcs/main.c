@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/01 15:12:10 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:32:36 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,10 +214,12 @@ int	main(void)
 	count = 0;
 	n = 64;
 	get_map("./maps/maptest.ber", &game);
+	if (is_rectangle(&game) == 0)
+		exit(0);
 	game.player.x = 0;
 	game.player.y = 0;
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, 1920, 1080, "so_long");
+	game.win = mlx_new_window(game.mlx, game.width * 64, game.height * 64, "so_long");
 	game.imgWall = mlx_xpm_file_to_image(game.mlx, "./assets/wall.xpm", &n, &n);
 	game.imgPlayer = mlx_xpm_file_to_image(game.mlx, "./assets/player.xpm", &n,
 			&n);
