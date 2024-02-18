@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"libft.h": "c",
+		"limits": "c",
+		"stdbool.h": "c",
+		"xlib.h": "c",
+		"keysym.h": "c",
+		"so_long.h": "c"
+	}
+}

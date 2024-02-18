@@ -6,15 +6,12 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/02 17:09:27 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/17 21:09:05 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef so_long
-# define so_long
-
-# define ANSI_COLOR_GREEN   "\x1b[32m"
-# define ANSI_COLOR_RESET   "\x1b[0m"
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
@@ -27,6 +24,10 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
+# include <stdbool.h>
+
+# define ANSI_COLOR_GREEN   "\x1b[32m"
+# define ANSI_COLOR_RESET   "\x1b[0m"
 
 typedef struct s_player {
 	int x;
@@ -66,7 +67,18 @@ enum keys {
 };
 
 void	get_map(char *filename, t_game *game);
-int	is_rectangle(t_game *game);
+void	ft_exit(t_game *game);
+int		get_map_details(t_game *game);
+int		check_utils(t_game *game);
+void	is_map_correctly_bounded(t_game *game, int x, int y);
+bool	load_display_and_window(t_game *game);
+bool	load_resources(t_game *game);
+int		validate_map(t_game *game);
+void	move_player_down(t_game *game, int *move);
+void	move_player_up(t_game *game, int *move);
+void	move_player_right(t_game *game, int *move);
+void	move_player_left(t_game *game, int *move);
+void	handle_input(int keycode, t_game *game, int *move);
 
 
 #endif

@@ -6,26 +6,31 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/02 17:27:56 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/17 22:25:27 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// int		squarnt(t_game *game)
-// {
-// 	int	i;
+int	check_utils(t_game *game)
+{
+	int	x;
+	int	y;
 
-// 	i = 0;
-// 	while (game->map[i])
-// 	{
-// 		if (ft_strlen(game->map[0]) != ft_strlen(game->map[i]))
-// 			return (1);
-// 		i++;
-// 	}
-// 	ft_printf("PRINTF TAILLE = %d\n", ft_strlen(game->map[1]));
-// 	return (0);
-// }
+	y = 0;
+	while (game->split[y])
+	{
+		x = 0;
+		while (game->split[y][x])
+		{
+			if (game->split[y][x] == 'C' || game->split[y][x] == 'E')
+				ft_exit(game);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
 
 char	*read_file(int fd)
 {
@@ -56,7 +61,6 @@ char	*read_file(int fd)
 	return (file);
 }
 
-
 void	get_map(char *filename, t_game *game)
 {
 	char	*line;
@@ -68,29 +72,59 @@ void	get_map(char *filename, t_game *game)
 	game->split = ft_split(line, '\n');
 }
 
-int    is_rectangle(t_game *game)
+int	get_map_details(t_game *game)
 {
-    size_t	y;
+	size_t	y;
 	size_t	x;
 
-    y = 0;
-    y++;
-    while (game->map[y])
-    {
+	y = 0;
+	while (game->map[y])
+	{
 		x = 0;
 		while (game->map[y][x])
 		{
-        	if (ft_strlen(game->map[0]) != ft_strlen(game->map[y]))
-        	{
-           	 ft_printf("!!! ERROR !!! The map is not rectangular!\n");
-           	 return (0);
-        	}
+			if (game->map[y][x] == 'P')
+			{
+				game->numPlayer += 1;
+				game->player = (t_player){.x = x, .y = y};
+			}
+			else if (game->map[y][x] == 'C')
+				game->collectible++;
+			else if (game->map[y][x] == 'E')
+				game->endPoint += 1;
+			if (ft_strlen(game->map[0]) != ft_strlen(game->map[y]))
+				return (0);
 			x++;
 		}
-        y++;
-    }
-	game->width = x;
-	game->height = y; 
-    return (1);
+		y++;
+	}
+	return (game->width = x, game->height = y, 1);
 }
+	// game->height = y; game->width = x;
 
+int	validate_map(t_game *game)
+{
+	if (get_map_details(game) == 0)
+	{
+		ft_printf("Erreur ! La carte n'est pas rectangulaire !");
+		return (0);
+	}
+	is_map_correctly_bounded(game, game->player.x, game->player.y);
+	check_utils(game);
+	if (game->endPoint != 1)
+	{
+		ft_printf("Erreur ! Nombre de sorties invalide !");
+		return (0);
+	}
+	if (game->numPlayer != 1)
+	{
+		ft_printf("Erreur ! Nombre de joueur incorrecte !");
+		return (0);
+	}
+	if (game->collectible == 0)
+	{
+		ft_printf("Erreur ! Aucun collectible sur la map !");
+		return (0);
+	}
+	return (1);
+}
