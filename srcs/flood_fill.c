@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:25:02 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/17 22:27:02 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:16:37 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,36 @@
 
 // TODO: fix flood fill for when player is in the corner, 
 // and return value if map is valid
-void	is_map_correctly_bounded(t_game *game, int x, int y)
+void	flood_fill_verification(t_game *game, int x, int y)
 {
 	game->split[y][x] = 'G';
 	if (game->split[y - 1][x] != '1' && game->split[y - 1][x] != 'G')
-		is_map_correctly_bounded(game, x, y - 1);
+		flood_fill_verification(game, x, y - 1);
 	if (game->split[y + 1][x] != '1' && game->split[y + 1][x] != 'G')
-		is_map_correctly_bounded(game, x, y + 1);
+		flood_fill_verification(game, x, y + 1);
 	if (game->split[y][x - 1] != '1' && game->split[y][x - 1] != 'G')
-		is_map_correctly_bounded(game, x - 1, y);
+		flood_fill_verification(game, x - 1, y);
 	if (game->split[y][x + 1] != '1' && game->split[y][x + 1] != 'G')
-		is_map_correctly_bounded(game, x + 1, y);
+		flood_fill_verification(game, x + 1, y);
+}
+
+int	is_well_closed(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while(game->map[0][i])
+	{
+		if (game->map[0][i] != '1' || game->map[game->height - 1][i] != '1')
+			return(0);
+		i++;
+	}
+	i = 0;
+	while(game->map[i])
+	{
+		if (game->map[i][0] != '1' || game->map[i][game->width - 1] != '1')
+			return(0);
+		i++;
+	}
+	return(1);
 }

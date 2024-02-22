@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/17 22:25:27 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:15:48 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*read_file(int fd)
 	int		n;
 
 	buff = ft_calloc((10000 + 1), sizeof(char));
+	if(!buff)
+		return(NULL);
 	n = 1;
 	file = NULL;
 	if (!file)
@@ -56,20 +58,28 @@ char	*read_file(int fd)
 	}
 	if (!file[0])
 		return (free(file), free(buff), NULL);
-	free(buff);
-	close(fd);
-	return (file);
+	return (free(buff), close(fd), file);
 }
+	// free(buff);
+	// close(fd);
 
 void	get_map(char *filename, t_game *game)
 {
 	char	*line;
 	int		fd_map;
 
+	if (extension_invalid(filename))
+	{
+		ft_printf("ERROR ! Fichier invalide.\n");
+		exit(0);
+	}
 	fd_map = open(filename, O_RDONLY);
+	if (fd_map == -1)
+		ft_exit(game);
 	line = read_file(fd_map);
 	game->map = ft_split(line, '\n');
 	game->split = ft_split(line, '\n');
+	free(line);
 }
 
 int	get_map_details(t_game *game)
@@ -104,27 +114,13 @@ int	get_map_details(t_game *game)
 
 int	validate_map(t_game *game)
 {
-	if (get_map_details(game) == 0)
-	{
-		ft_printf("Erreur ! La carte n'est pas rectangulaire !");
+	if (!get_map_details(game))
+		return (ft_printf("Erreur ! La carte n'est pas rectangulaire !\n"), 0);
+	// check_utils(game);
+	if (is_well_closed(game) == 0)
 		return (0);
-	}
-	is_map_correctly_bounded(game, game->player.x, game->player.y);
-	check_utils(game);
-	if (game->endPoint != 1)
-	{
-		ft_printf("Erreur ! Nombre de sorties invalide !");
-		return (0);
-	}
-	if (game->numPlayer != 1)
-	{
-		ft_printf("Erreur ! Nombre de joueur incorrecte !");
-		return (0);
-	}
-	if (game->collectible == 0)
-	{
-		ft_printf("Erreur ! Aucun collectible sur la map !");
-		return (0);
-	}
+	if (game->endPoint != 1 || game->numPlayer != 1 || game->collectible == 0)
+		return (ft_printf("Erreur ! Map incorrecte !\n"), 0);
+	flood_fill_verification(game, game->player.x, game->player.y);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 21:07:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/18 15:13:04 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:41:21 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ void	handle_input(int keycode, t_game *game, int *move)
 		move_player_right(game, move);
 }
 
-// int		verify_extension(char **av)
-// {
-// 	int	i;
+int		extension_invalid(char *str)
+{
+	int	i;
 
-// 	i = 0;
-// 	if (av[1])
-// 		i = ft_strlen(av[1]) - 4;
-	
-// 	}
-// }
+	i = ft_strlen(str) - 4;
+	return (ft_strncmp(str + i, ".ber", ft_strlen(str)));
+}

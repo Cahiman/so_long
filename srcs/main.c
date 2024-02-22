@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/17 23:00:27 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:25:48 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	render(t_game *game)
 	return (0);
 }
 
-// #define handle_error exit(0)
-
 int	main(int ac, char **av)
 {
 	t_game	game;
@@ -102,6 +100,7 @@ int	main(int ac, char **av)
 	get_map(av[1], &game);
 	if (validate_map(&game) == 0)
 		exit(0);
+	printf("test\n");
 	if (load_display_and_window(&game) == 0)
 		exit(0);
 	if (load_resources(&game) == 0)

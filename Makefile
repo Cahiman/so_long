@@ -26,10 +26,17 @@ $(NAME): $(SRCS)
 
 clean:
 	make -C libs/mlx clean
+	make -C libs/libft clean
+	make -C libs/printf clean
 
 fclean: clean
+	make -C libs/libft fclean
+	make -C libs/printf fclean
 	rm -f $(NAME)
 
 re: fclean all
+	make -C libs/libft re
+	make -C libs/printf re
+	make -C libs/mlx re
 
 .PHONY: all clean fclean re

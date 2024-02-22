@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:57:22 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/17 21:44:00 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:23:02 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,23 @@
 
 void	ft_exit(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->imgWall);
-	mlx_destroy_image(game->mlx, game->imgPlayer);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
+	if (game->imgWall != NULL)
+		mlx_destroy_image(game->mlx, game->imgWall);
+	if (game->imgPlayer != NULL)
+		mlx_destroy_image(game->mlx, game->imgPlayer);
+	if (game->imgFloor != NULL)
+		mlx_destroy_image(game->mlx, game->imgFloor);
+	if (game->imgCoin != NULL)
+		mlx_destroy_image(game->mlx, game->imgCoin);
+	if (game->imgEnd != NULL)
+		mlx_destroy_image(game->mlx, game->imgEnd);
+	if (game->win != NULL)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx != NULL)
+		mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	free(game->map);
+	ft_free(game->split);
+	ft_free(game->map);
+
 	exit(0);
 }

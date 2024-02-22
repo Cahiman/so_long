@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:15:52 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/17 22:56:09 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:14:06 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ bool	load_resources(t_game *game)
 			&_ignored, &_ignored);
 	game->imgEnd = mlx_xpm_file_to_image(game->mlx, "./assets/end.xpm",
 			&_ignored, &_ignored);
+	if (!game->imgEnd || !game->imgWall || !game->imgPlayer || !game->imgFloor || !game->imgCoin)
+		return (false);
 	return (true);
 }
