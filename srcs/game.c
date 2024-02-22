@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:15:52 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 18:14:06 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:18:53 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ bool	load_display_and_window(t_game *game)
 	return (true);
 }
 
-// typedef struct s_texture {
-// 	void	*data;
-// 	int		width;
-// 	int		height;
-// }	t_texture;
-
-// TODO: handle errors
 bool	load_resources(t_game *game)
 {
 	int		_ignored;

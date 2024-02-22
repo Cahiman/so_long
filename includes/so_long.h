@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 17:41:31 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:18:47 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	get_map(char *filename, t_game *game);
 void	ft_exit(t_game *game);
 int		get_map_details(t_game *game);
 int		check_utils(t_game *game);
-void	flood_fill_verification(t_game *game, int x, int y);
+void	flood_fill_verification(char **split, int x, int y);
 bool	load_display_and_window(t_game *game);
 bool	load_resources(t_game *game);
 int		validate_map(t_game *game);
-int	is_well_closed(t_game *game);
+int		is_well_closed(t_game *game);
 void	move_player_down(t_game *game, int *move);
 void	move_player_up(t_game *game, int *move);
 void	move_player_right(t_game *game, int *move);

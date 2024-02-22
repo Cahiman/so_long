@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 18:25:48 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:22:54 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	player_move(int keycode, t_game *game)
 		render_img(game, game->imgPlayer, game->player.x, game->player.y);
 	else
 		render_img(game, game->imgEnd, game->player.x, game->player.y);
-	return (ft_printf("NOMBRE MOUVEMENT : %d\n", move), 0);
+	return (ft_printf("Number of movements : %d\n", move), 0);
 }
 
 void	render_tile_get_player_pos_and_collectibles(t_game *game, int x, int y)
@@ -95,12 +95,11 @@ int	main(int ac, char **av)
 	count = 0;
 	n = 64;
 	if (ac != 2)
-		return (0);
+		return (ft_printf("ERROR ! Please add a filemap .ber.\n"), 0);
 	ft_bzero(&game, sizeof(game));
 	get_map(av[1], &game);
 	if (validate_map(&game) == 0)
 		exit(0);
-	printf("test\n");
 	if (load_display_and_window(&game) == 0)
 		exit(0);
 	if (load_resources(&game) == 0)

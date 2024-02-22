@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 19:15:48 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:23:14 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ char	*read_file(int fd)
 		return (free(file), free(buff), NULL);
 	return (free(buff), close(fd), file);
 }
-	// free(buff);
-	// close(fd);
 
 void	get_map(char *filename, t_game *game)
 {
@@ -70,7 +68,7 @@ void	get_map(char *filename, t_game *game)
 
 	if (extension_invalid(filename))
 	{
-		ft_printf("ERROR ! Fichier invalide.\n");
+		ft_printf("ERROR ! Invalid file.\n");
 		exit(0);
 	}
 	fd_map = open(filename, O_RDONLY);
@@ -110,17 +108,15 @@ int	get_map_details(t_game *game)
 	}
 	return (game->width = x, game->height = y, 1);
 }
-	// game->height = y; game->width = x;
 
 int	validate_map(t_game *game)
 {
 	if (!get_map_details(game))
-		return (ft_printf("Erreur ! La carte n'est pas rectangulaire !\n"), 0);
-	// check_utils(game);
+		return (ft_printf("ERROR ! The map isn't rectangular !\n"), 0);
 	if (is_well_closed(game) == 0)
 		return (0);
 	if (game->endPoint != 1 || game->numPlayer != 1 || game->collectible == 0)
-		return (ft_printf("Erreur ! Map incorrecte !\n"), 0);
-	flood_fill_verification(game, game->player.x, game->player.y);
+		return (ft_printf("ERROR ! Invalid map !\n"), 0);
+	flood_fill_verification(game->split, game->player.x, game->player.y);
 	return (1);
 }

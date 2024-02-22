@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:15:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/17 22:56:21 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:48:26 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,4 @@ void	move_player_left(t_game *game, int *move)
 		(*move)++;
 	}
 }
+
