@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 16:42:30 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:13:27 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-# define ANSI_COLOR_CYAN	"\e[1;93m"
-# define ANSI_COLOR_RED		"\e[1;91m"
-# define ANSI_COLOR_GREEN   "\e[1;92m"
-# define ANSI_COLOR_RESET   "\e[0m"
+# define CYAN	"\e[1;93m"
+# define RED		"\e[1;91m"
+# define GREEN   "\e[1;92m"
+# define RESET   "\e[0m"
 
 typedef struct s_player {
 	int x;

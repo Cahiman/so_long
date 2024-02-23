@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   imput.c                                            :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 21:07:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 17:41:21 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:21:29 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	handle_input(int keycode, t_game *game, int *move)
 		move_player_right(game, move);
 }
 
-int		extension_invalid(char *str)
+int	extension_invalid(char *str)
 {
 	int	i;
 

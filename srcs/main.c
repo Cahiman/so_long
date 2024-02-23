@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 16:35:53 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:14:48 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	player_move(int keycode, t_game *game)
 	if (game->map[game->player.y][game->player.x] == 'E'
 		&& game->collectible == 0)
 	{
-		ft_printf(ANSI_COLOR_GREEN "CONGRATULATIONS ! YOU WON !\n" ANSI_COLOR_RESET);
+		ft_printf(GREEN "CONGRATULATIONS ! YOU WON !\n" RESET);
 		ft_exit(game);
 	}
 	if (game->map[old_y][old_x] != 'E')
@@ -45,7 +45,7 @@ int	player_move(int keycode, t_game *game)
 		render_img(game, game->imgPlayer, game->player.x, game->player.y);
 	else
 		render_img(game, game->imgEnd, game->player.x, game->player.y);
-	return (ft_printf(ANSI_COLOR_CYAN "Number of movements : %d\n" ANSI_COLOR_RESET, move), 0);
+	return (ft_printf(CYAN "Number of movements : %d\n" RESET, move), 0);
 }
 
 void	render_tile_get_player_pos_and_collectibles(t_game *game, int x, int y)
@@ -95,7 +95,7 @@ int	main(int ac, char **av)
 	count = 0;
 	n = 64;
 	if (ac != 2)
-		return (ft_printf(ANSI_COLOR_RED "ERROR ! Please add a map file : .ber !\n" ANSI_COLOR_RESET), 0);
+		return (ft_printf(RED "ERROR ! Add a map file : .ber !\n" RESET), 0);
 	ft_bzero(&game, sizeof(game));
 	get_map(av[1], &game);
 	if (validate_map(&game) == 0)

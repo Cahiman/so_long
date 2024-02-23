@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:25:02 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 16:45:32 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:20:59 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_utils(t_game *game)
 {
 	int	x;
 	int	y;
-	
+
 	y = 0;
 	while (game->split[y])
 	{
@@ -38,7 +38,7 @@ int	check_utils(t_game *game)
 		{
 			if (game->split[y][x] == 'C' || game->split[y][x] == 'E')
 			{
-				ft_printf(ANSI_COLOR_RED "ERROR ! Invalid map.\n" ANSI_COLOR_RESET);
+				ft_printf(RED "ERROR ! Invalid map.\n" RESET);
 				ft_exit(game);
 			}
 			x++;
@@ -53,18 +53,18 @@ int	is_well_closed(t_game *game)
 	int	i;
 
 	i = 0;
-	while(game->map[0][i])
+	while (game->map[0][i])
 	{
 		if (game->map[0][i] != '1' || game->map[game->height - 1][i] != '1')
-			return(ft_printf(ANSI_COLOR_RED "ERROR ! Invalid map.\n" ANSI_COLOR_RESET), 0);
+			return (ft_printf(RED "ERROR ! Invalid map.\n" RESET), 0);
 		i++;
 	}
 	i = 0;
-	while(game->map[i])
+	while (game->map[i])
 	{
 		if (game->map[i][0] != '1' || game->map[i][game->width - 1] != '1')
-			return(ft_printf(ANSI_COLOR_RED "ERROR ! Invalid map.\n" ANSI_COLOR_RESET), 0);
+			return (ft_printf(RED "ERROR ! Invalid map.\n" RESET), 0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
