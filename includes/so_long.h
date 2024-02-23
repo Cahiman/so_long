@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 21:18:47 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:51:45 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
+# define ANSI_COLOR_RED "\e[0;31m"
 # define ANSI_COLOR_GREEN   "\x1b[32m"
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
@@ -54,7 +55,7 @@ typedef struct	s_game {
 	
 }		t_game;
 
-enum keys {
+enum e_keys {
 	KEY_ESC = 65307,
 	KEY_W = 119,
 	KEY_S = 115,
@@ -70,7 +71,7 @@ void	get_map(char *filename, t_game *game);
 void	ft_exit(t_game *game);
 int		get_map_details(t_game *game);
 int		check_utils(t_game *game);
-void	flood_fill_verification(char **split, int x, int y);
+void	flood_fill_verification(t_game *game, int x, int y);
 bool	load_display_and_window(t_game *game);
 bool	load_resources(t_game *game);
 int		validate_map(t_game *game);

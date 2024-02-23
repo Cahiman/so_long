@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 21:22:54 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:49:45 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int ac, char **av)
 	count = 0;
 	n = 64;
 	if (ac != 2)
-		return (ft_printf("ERROR ! Please add a filemap .ber.\n"), 0);
+		return (ft_printf("ERROR ! Please add a map file : .ber !\n"), 0);
 	ft_bzero(&game, sizeof(game));
 	get_map(av[1], &game);
 	if (validate_map(&game) == 0)

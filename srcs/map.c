@@ -6,31 +6,12 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 21:23:14 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:52:07 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_utils(t_game *game)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (game->split[y])
-	{
-		x = 0;
-		while (game->split[y][x])
-		{
-			if (game->split[y][x] == 'C' || game->split[y][x] == 'E')
-				ft_exit(game);
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
 
 char	*read_file(int fd)
 {
@@ -68,13 +49,18 @@ void	get_map(char *filename, t_game *game)
 
 	if (extension_invalid(filename))
 	{
-		ft_printf("ERROR ! Invalid file.\n");
+		ft_printf("ERROR ! Invalid map file.\n");
 		exit(0);
 	}
 	fd_map = open(filename, O_RDONLY);
 	if (fd_map == -1)
 		ft_exit(game);
 	line = read_file(fd_map);
+	if (!line)
+	{
+		ft_printf(ANSI_COLOR_RED "ERROR ! Map file empty.\n" ANSI_COLOR_GREEN);
+		ft_exit(game);
+	}
 	game->map = ft_split(line, '\n');
 	game->split = ft_split(line, '\n');
 	free(line);
@@ -117,6 +103,7 @@ int	validate_map(t_game *game)
 		return (0);
 	if (game->endPoint != 1 || game->numPlayer != 1 || game->collectible == 0)
 		return (ft_printf("ERROR ! Invalid map !\n"), 0);
-	flood_fill_verification(game->split, game->player.x, game->player.y);
+	flood_fill_verification(game, game->player.x, game->player.y);
+	check_utils(game);
 	return (1);
 }
