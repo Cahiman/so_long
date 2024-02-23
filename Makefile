@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 HEADER = ./
 
-SRCS = ./srcs/main.c ./srcs/map.c ./srcs/exit.c ./srcs/game.c ./srcs/movement.c ./srcs/imput.c ./srcs/flood_fill.c
+SRCS = ./srcs/main.c ./srcs/map.c ./srcs/exit.c ./srcs/game.c ./srcs/movement.c ./srcs/input.c ./srcs/flood_fill.c
 
 LIBFTDIR = libs/libft/
 

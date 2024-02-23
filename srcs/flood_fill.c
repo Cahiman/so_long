@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:25:02 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 15:40:26 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:56:25 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_utils(t_game *game)
 		{
 			if (game->split[y][x] == 'C' || game->split[y][x] == 'E')
 			{
-				ft_printf("ERROR ! Invalid map.\n");
+				ft_printf(ANSI_COLOR_RED "ERROR ! Invalid map.\n" ANSI_COLOR_RESET);
 				ft_exit(game);
 			}
 			x++;
