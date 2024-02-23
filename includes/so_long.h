@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 17:13:27 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:37:02 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ enum e_keys {
 };
 
 void	get_map(char *filename, t_game *game);
+void	last_map_verification(t_game *game);
 void	ft_exit(t_game *game);
 int		get_map_details(t_game *game);
 int		check_utils(t_game *game);

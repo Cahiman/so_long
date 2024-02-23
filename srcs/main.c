@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 17:14:48 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:46:22 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,19 +95,10 @@ int	main(int ac, char **av)
 	count = 0;
 	n = 64;
 	if (ac != 2)
-		return (ft_printf(RED "ERROR ! Add a map file : .ber !\n" RESET), 0);
+		return (ft_printf(RED "ERROR ! Incorrect number of args.\n" RESET), 0);
 	ft_bzero(&game, sizeof(game));
 	get_map(av[1], &game);
-	if (validate_map(&game) == 0)
-	{
-		ft_free(game.map);
-		ft_free(game.split);
-		exit(0);
-	}
-	if (load_display_and_window(&game) == 0)
-		exit(0);
-	if (load_resources(&game) == 0)
-		exit(0);
+	last_map_verification(&game);
 	render(&game);
 	mlx_key_hook(game.win, player_move, &game);
 	mlx_hook(game.win, 33, 131072, (void *)ft_exit, &game);

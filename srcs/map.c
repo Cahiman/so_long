@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 17:19:50 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:40:54 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	get_map(char *filename, t_game *game)
 
 	if (extension_invalid(filename))
 	{
-		ft_printf(RED "ERROR ! Invalid map file.\n" RESET);
+		ft_printf(RED "ERROR ! Add a map file : .ber !\n" RESET);
 		exit(0);
 	}
 	fd_map = open(filename, O_RDONLY);
