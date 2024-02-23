@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:25:02 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 15:56:25 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:45:32 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ int	is_well_closed(t_game *game)
 	while(game->map[0][i])
 	{
 		if (game->map[0][i] != '1' || game->map[game->height - 1][i] != '1')
-			return(ft_printf("ERROR ! Invalid map.\n"), 0);
+			return(ft_printf(ANSI_COLOR_RED "ERROR ! Invalid map.\n" ANSI_COLOR_RESET), 0);
 		i++;
 	}
 	i = 0;
 	while(game->map[i])
 	{
 		if (game->map[i][0] != '1' || game->map[i][game->width - 1] != '1')
-			return(ft_printf("ERROR ! Invalid map.\n"), 0);
+			return(ft_printf(ANSI_COLOR_RED "ERROR ! Invalid map.\n" ANSI_COLOR_RESET), 0);
 		i++;
 	}
 	return(1);

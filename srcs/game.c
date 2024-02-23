@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:15:52 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/22 20:18:53 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:06:31 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ bool	load_display_and_window(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (false);
+	if (game->height > 16 || game->width > 30)
+		return(ft_printf(ANSI_COLOR_RED "ERROR ! Map too big.\n"ANSI_COLOR_RESET), 0);
 	game->win = mlx_new_window(game->mlx, game->width * 64,
 			game->height * 64, "so_long");
 	if (!game->win)
