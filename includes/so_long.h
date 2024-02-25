@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 19:37:02 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:57:50 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-# define CYAN	"\e[1;93m"
+# define YELLOW	"\e[1;93m"
 # define RED		"\e[1;91m"
 # define GREEN   "\e[1;92m"
 # define RESET   "\e[0m"
@@ -52,6 +52,7 @@ typedef struct	s_game {
 	char 	**split;
 	int		endPoint;
 	int		numPlayer;
+	int		fd_map;
 	t_player player;
 	
 }		t_game;

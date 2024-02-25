@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 19:46:22 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:14:30 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ int	player_move(int keycode, t_game *game)
 		render_img(game, game->imgPlayer, game->player.x, game->player.y);
 	else
 		render_img(game, game->imgEnd, game->player.x, game->player.y);
-	return (ft_printf(CYAN "Number of movements : %d\n" RESET, move), 0);
+	return (0);
 }
 
 void	render_tile_get_player_pos_and_collectibles(t_game *game, int x, int y)
 {
+	if (game->map[y][x] != '1' && (game->map[y][x] != 'P')
+		&& (game->map[y][x] != 'C') && (game->map[y][x] != 'E')
+		&& (game->map[y][x] != '0'))
+		ft_exit(game);
 	if (game->map[y][x] == '1')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->imgWall, x * 64, y * 64);

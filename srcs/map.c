@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 19:40:54 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:19:42 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,25 @@ char	*read_file(int fd)
 void	get_map(char *filename, t_game *game)
 {
 	char	*line;
-	int		fd_map;
 
 	if (extension_invalid(filename))
 	{
 		ft_printf(RED "ERROR ! Add a map file : .ber !\n" RESET);
 		exit(0);
 	}
-	fd_map = open(filename, O_RDONLY);
-	if (fd_map == -1)
+	game->fd_map = open(filename, O_RDONLY);
+	if (game->fd_map == -1)
 		ft_exit(game);
-	line = read_file(fd_map);
+	line = read_file(game->fd_map);
 	if (!line)
 	{
-		ft_printf(RED "ERROR ! Map file empty.\n" GREEN);
+		ft_printf(RED "ERROR ! Map file empty.\n" RESET);
+		ft_exit(game);
+	}
+	if (ft_strnstr(line, "\n\n", ft_strlen(line)) != NULL)
+	{
+		ft_printf(RED "ERROR ! Map file contains unexpected newline.\n" RESET);
+		free(line);
 		ft_exit(game);
 	}
 	game->map = ft_split(line, '\n');
@@ -99,7 +104,7 @@ int	validate_map(t_game *game)
 	if (!get_map_details(game))
 		return (ft_printf(RED "ERROR ! The map isn't rectangular !\n" RESET), 0);
 	if (is_well_closed(game) == 0)
-		return (0);
+		return (ft_printf(RED "ERROR ! Invalid map.\n" RESET), 0);
 	if (game->endPoint != 1 || game->numPlayer != 1 || game->collectible == 0)
 		return (ft_printf(RED "ERROR ! Invalid map !\n" RESET), 0);
 	flood_fill_verification(game, game->player.x, game->player.y);
