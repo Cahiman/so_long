@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/25 19:28:55 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:41:04 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	get_map_details(t_game *game)
 
 int	validate_map(t_game *game)
 {
+	if (!get_map_infos(game))
+		return (ft_printf(RED "ERROR ! Invalid map !\n" RESET), 0);
 	if (!get_map_details(game))
 		return (ft_printf(RED "ERROR ! The map isn't rectangular !\n" RESET), 0);
 	if (is_well_closed(game) == 0)
@@ -109,5 +111,27 @@ int	validate_map(t_game *game)
 		return (ft_printf(RED "ERROR ! Invalid map !\n" RESET), 0);
 	flood_fill_verification(game, game->player.x, game->player.y);
 	check_utils(game);
+	return (1);
+}
+
+int	get_map_infos(t_game *game)
+{
+	size_t	y;
+	size_t	x;
+
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] != '1' && (game->map[y][x] != 'P')
+				&& (game->map[y][x] != 'C') && (game->map[y][x] != 'E')
+				&& (game->map[y][x] != '0'))
+				return (0);
+			x++;
+		}
+		y++;
+	}
 	return (1);
 }

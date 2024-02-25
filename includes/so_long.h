@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/25 19:30:54 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:40:02 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	handle_input(int keycode, t_game *game, int *move);
 void	flood_fill_verification(t_game *game, int x, int y);
 bool	load_display_and_window(t_game *game);
 bool	load_resources(t_game *game);
+int		get_map_infos(t_game *game);
 int		get_map_details(t_game *game);
 int		check_utils(t_game *game);
 int		validate_map(t_game *game);
