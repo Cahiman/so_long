@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/25 19:14:30 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:28:34 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	player_move(int keycode, t_game *game)
 		ft_exit(game);
 	}
 	if (game->map[old_y][old_x] != 'E')
-		render_img(game, game->imgFloor, old_x, old_y);
+		render_img(game, game->img_floor, old_x, old_y);
 	if (game->map[game->player.y][game->player.x] != 'E')
-		render_img(game, game->imgPlayer, game->player.x, game->player.y);
+		render_img(game, game->img_player, game->player.x, game->player.y);
 	else
-		render_img(game, game->imgEnd, game->player.x, game->player.y);
+		render_img(game, game->img_end, game->player.x, game->player.y);
 	return (0);
 }
 
@@ -56,19 +56,19 @@ void	render_tile_get_player_pos_and_collectibles(t_game *game, int x, int y)
 		ft_exit(game);
 	if (game->map[y][x] == '1')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->imgWall, x * 64, y * 64);
+			game->img_wall, x * 64, y * 64);
 	else if (game->map[y][x] == 'P')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->imgPlayer, x * 64, y * 64);
+			game->img_player, x * 64, y * 64);
 	else if (game->map[y][x] == '0')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->imgFloor, x * 64, y * 64);
+			game->img_floor, x * 64, y * 64);
 	else if (game->map[y][x] == 'C')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->imgCoin, x * 64, y * 64);
+			game->img_coin, x * 64, y * 64);
 	else if (game->map[y][x] == 'E')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->imgEnd, x * 64, y * 64);
+			game->img_end, x * 64, y * 64);
 }
 
 int	render(t_game *game)

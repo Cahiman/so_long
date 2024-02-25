@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:15:52 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/23 19:43:48 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:27:44 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ bool	load_resources(t_game *game)
 {
 	int		_ignored;
 
-	game->imgWall = mlx_xpm_file_to_image(game->mlx, "./assets/wall.xpm",
+	game->img_wall = mlx_xpm_file_to_image(game->mlx, "./assets/wall.xpm",
 			&_ignored, &_ignored);
-	game->imgPlayer = mlx_xpm_file_to_image(game->mlx, "./assets/player.xpm",
+	game->img_player = mlx_xpm_file_to_image(game->mlx, "./assets/player.xpm",
 			&_ignored, &_ignored);
-	game->imgFloor = mlx_xpm_file_to_image(game->mlx, "./assets/floor.xpm",
+	game->img_floor = mlx_xpm_file_to_image(game->mlx, "./assets/floor.xpm",
 			&_ignored, &_ignored);
-	game->imgCoin = mlx_xpm_file_to_image(game->mlx, "./assets/coin.xpm",
+	game->img_coin = mlx_xpm_file_to_image(game->mlx, "./assets/coin.xpm",
 			&_ignored, &_ignored);
-	game->imgEnd = mlx_xpm_file_to_image(game->mlx, "./assets/end.xpm",
+	game->img_end = mlx_xpm_file_to_image(game->mlx, "./assets/end.xpm",
 			&_ignored, &_ignored);
-	if (!game->imgEnd || !game->imgWall || !game->imgPlayer
-		|| !game->imgFloor || !game->imgCoin)
+	if (!game->img_end || !game->img_wall || !game->img_player
+		|| !game->img_floor || !game->img_coin)
 		return (false);
 	return (true);
 }

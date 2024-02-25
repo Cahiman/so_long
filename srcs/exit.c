@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:57:22 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/25 19:00:07 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:26:49 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	ft_exit(t_game *game)
 {
-	if (game->imgWall != NULL)
-		mlx_destroy_image(game->mlx, game->imgWall);
-	if (game->imgPlayer != NULL)
-		mlx_destroy_image(game->mlx, game->imgPlayer);
-	if (game->imgFloor != NULL)
-		mlx_destroy_image(game->mlx, game->imgFloor);
-	if (game->imgCoin != NULL)
-		mlx_destroy_image(game->mlx, game->imgCoin);
-	if (game->imgEnd != NULL)
-		mlx_destroy_image(game->mlx, game->imgEnd);
+	if (game->img_wall != NULL)
+		mlx_destroy_image(game->mlx, game->img_wall);
+	if (game->img_player != NULL)
+		mlx_destroy_image(game->mlx, game->img_player);
+	if (game->img_floor != NULL)
+		mlx_destroy_image(game->mlx, game->img_floor);
+	if (game->img_coin != NULL)
+		mlx_destroy_image(game->mlx, game->img_coin);
+	if (game->img_end != NULL)
+		mlx_destroy_image(game->mlx, game->img_end);
 	if (game->win != NULL)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx != NULL)
