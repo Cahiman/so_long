@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:03:14 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/25 19:30:02 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:30:54 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # include <stdbool.h>
 
 # define YELLOW	"\e[1;93m"
-# define RED		"\e[1;91m"
-# define GREEN   "\e[1;92m"
-# define RESET   "\e[0m"
+# define GREEN	"\e[1;92m"
+# define RESET	"\e[0m"
+# define RED	"\e[1;91m"
 
 typedef struct s_player {
 	int	x;
