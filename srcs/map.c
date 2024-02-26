@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/26 18:22:45 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/26 22:03:25 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	get_map(char *filename, t_game *game)
 	game->map = ft_split(line, '\n');
 	game->split = ft_split(line, '\n');
 	if (!game->map || !game->split)
-		ft_exit(game);
+		return (free(line), ft_exit(game), 0);
 	return (free(line), 0);
 }
 

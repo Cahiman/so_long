@@ -26,6 +26,7 @@ $(NAME): $(SRCS)
 
 clean:
 	make -C libs/mlx clean
+	make -C libs/libft fclean
 
 fclean: clean
 	rm -f $(NAME)
