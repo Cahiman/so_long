@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:57:22 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/25 19:26:49 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:10:25 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	ft_exit(t_game *game)
 	if (game->fd_map)
 		close(game->fd_map);
 	free(game->mlx);
-	ft_free(game->split);
-	ft_free(game->map);
+	if (game->split != NULL)
+		ft_free(game->split);
+	if (game->map != NULL)
+		ft_free(game->map);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/25 19:41:04 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:22:45 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,34 @@ char	*read_file(int fd)
 		file = ft_strjoin(file, buff);
 		free(tmp);
 	}
-	if (!file[0])
+	if (!file || !file[0])
 		return (free(file), free(buff), NULL);
 	return (free(buff), close(fd), file);
 }
 
-void	get_map(char *filename, t_game *game)
+int	get_map(char *filename, t_game *game)
 {
 	char	*line;
 
 	if (extension_invalid(filename))
-	{
-		ft_printf(RED "ERROR ! Add a map file : .ber !\n" RESET);
-		exit(0);
-	}
+		return (ft_printf(RED "ERROR ! Add a map file : .ber !\n" RESET),
+			ft_exit(game), 0);
 	game->fd_map = open(filename, O_RDONLY);
 	if (game->fd_map == -1)
-		ft_exit(game);
+		return (ft_printf(RED "ERROR ! Map does not exist !\n" RESET),
+			ft_exit(game), 0);
 	line = read_file(game->fd_map);
 	if (!line)
-	{
-		ft_printf(RED "ERROR ! Map file empty.\n" RESET);
-		ft_exit(game);
-	}
+		return (ft_printf(RED "ERROR ! Map file empty.\n" RESET),
+			ft_exit(game), 0);
 	if (ft_strnstr(line, "\n\n", ft_strlen(line)) != NULL)
-	{
-		ft_printf(RED "ERROR ! Map file contains unexpected newline.\n" RESET);
-		free(line);
-		ft_exit(game);
-	}
+		return (ft_printf(RED "ERROR ! Map file contains unexpected newline.\n"
+				RESET), free(line), ft_exit(game), 0);
 	game->map = ft_split(line, '\n');
 	game->split = ft_split(line, '\n');
-	free(line);
+	if (!game->map || !game->split)
+		ft_exit(game);
+	return (free(line), 0);
 }
 
 int	get_map_details(t_game *game)
