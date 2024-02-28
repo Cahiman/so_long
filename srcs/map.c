@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:36:58 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/26 22:03:25 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:42:27 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ int	validate_map(t_game *game)
 		return (ft_printf(RED "ERROR ! Invalid map.\n" RESET), 0);
 	if (game->end_point != 1 || game->num_player != 1 || game->collectible == 0)
 		return (ft_printf(RED "ERROR ! Invalid map !\n" RESET), 0);
-	flood_fill_verification(game, game->player.x, game->player.y);
+	if (game->height < 16 && game->width < 30)
+		flood_fill_verification(game, game->player.x, game->player.y);
+	else
+		return (ft_printf(RED "ERROR ! Map too big.\n"RESET), 0);
 	check_utils(game);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/02/26 19:39:53 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:16:56 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ int	player_move(int keycode, t_game *game)
 	}
 	if (game->map[old_y][old_x] != 'E')
 		render_img(game, game->img_floor, old_x, old_y);
-	if (game->map[game->player.y][game->player.x] != 'E')
-		render_img(game, game->img_player, game->player.x, game->player.y);
 	else
-		render_img(game, game->img_end, game->player.x, game->player.y);
+		render_img(game, game->img_end, old_x, old_y);
+	render_img(game, game->img_player, game->player.x, game->player.y);
 	return (0);
 }
 
