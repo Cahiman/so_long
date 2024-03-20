@@ -5,6 +5,7 @@
 		"stdbool.h": "c",
 		"xlib.h": "c",
 		"keysym.h": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"mlx.h": "c"
 	}
 }

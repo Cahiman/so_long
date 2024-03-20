@@ -1,36 +1,29 @@
 NAME = so_long
-CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
-HEADER = ./
 
-SRCS = ./srcs/exit.c ./srcs/flood_fill.c ./srcs/game.c ./srcs/input.c ./srcs/main.c ./srcs/map.c ./srcs/movement.c
+C_FILES = main.c exit.c flood_fill.c game.c input.c map.c movement.c
+SRCS = $(addprefix srcs/,$(C_FILES))
 
-LIBFTDIR = libs/libft/
+CFLAGS = -Wall -Wextra -Werror
 
-LIBFTNAME = libft.a
+LIBS = printf/libftprintf.a libft/libft.a
+DEPS = $(addprefix libs/,$(LIBS))
 
-LIBFT = $(LIBFTDIR)$(LIBFTNAME)
+all: $(NAME)
 
-DEPS = libs/printf/libftprintf.a
-
-
-all: $(LIBFT) $(NAME)
-
-$(LIBFT):
-	make -C $(LIBFTDIR)
-
-$(NAME): $(SRCS)
+$(NAME):
 	make -C libs/mlx
 	make -C libs/printf
-	cc $(CFLAGS) $(SRCS) -g3 -I includes/ -L libs/mlx -l mlx -I mlx -L $(LIBFTDIR) -lft -lXext -lX11 -lm -lz -o $(NAME) $(DEPS)
+	make -C libs/libft
+	cc $(SRCS) -g3 -I includes/ -L libs/mlx -l mlx -I mlx -lXext -lX11 -lm -lz -o $(NAME) $(DEPS)
 
 clean:
 	make -C libs/mlx clean
-	make -C libs/libft fclean
+	make -C libs/printf clean
+	make -C libs/libft clean
 
 fclean: clean
+	make -C libs/printf fclean
+	make -C libs/libft fclean
 	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all clean fclean re
