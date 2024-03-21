@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:37:42 by baiannon          #+#    #+#             */
-/*   Updated: 2024/03/14 14:56:22 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:59:55 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	render_img(t_game *game, void *img, int x, int y)
 {
@@ -88,11 +88,7 @@ int	render(t_game *game)
 int	main(int ac, char **av)
 {
 	t_game	game;
-	int		count;
-	int		n;
 
-	count = 0;
-	n = 64;
 	if (ac != 2)
 		return (ft_printf(RED "ERROR ! Incorrect number of args.\n" RESET), 0);
 	ft_bzero(&game, sizeof(game));
@@ -102,4 +98,5 @@ int	main(int ac, char **av)
 	mlx_key_hook(game.win, player_move, &game);
 	mlx_hook(game.win, 33, 131072, (void *)ft_exit, &game);
 	mlx_loop(game.mlx);
+	
 }
